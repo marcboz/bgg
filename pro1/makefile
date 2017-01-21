@@ -1,4 +1,6 @@
 all:
 	g++ -c main.cpp
 	g++ -c movement.cpp
-	g++ -o run main.o movement.o -lsfml-graphics -lsfml-window -lsfml-system
+	g++ -c entity.cpp
+	g++ -c player.cpp
+	g++ -o run main.o movement.o entity.o player.o -lsfml-graphics -lsfml-window -lsfml-system

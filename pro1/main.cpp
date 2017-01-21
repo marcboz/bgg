@@ -4,7 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "movement.h"
+//#include "movement.hpp"
+#include "entity.hpp"
+#include "player.hpp"
 
 using namespace sf;
 
@@ -31,17 +33,15 @@ int main()
   RenderWindow window(VideoMode(window_sizex,window_sizey),"project1");
   //-------zmienne które zostają w main-----------
   //-------zmienne które lecą do innej klasy------
-  float movement_speed=0.5;
-  Vector2f charsize(50,120);
   Texture chartemp;
   chartemp.loadFromFile("chartemp.png");
-  Sprite player_character;
   Vector2f player_position;
-  player_position.x=window_sizex/2-charsize.x/2;
-  player_position.y=window_sizey/2-charsize.y/2;
+  Player player(chartemp,player_position,true);
 
-  player_character.setTexture(chartemp);
-  player_character.setPosition(player_position);
+  player_position.x=window_sizex/2-60;
+  player_position.y=window_sizey/2-25;
+  player.setEntityPosition(player_position);
+
 
   //-------zmienne które lecą do innej klasy------
 
@@ -60,10 +60,10 @@ int main()
 		dt=time.asMilliseconds()-old_time;
 		old_time=time.asMilliseconds();
 
-    Movement::playerMovement(movement_speed,player_position,player_character,dt);
+    player.playerMovement(dt);
 
-    if(Mouse::isButtonPressed(Mouse::Left))player_character.setPosition(Mouse::getPosition(window).x,Mouse::getPosition(window).y);
-    window.draw(player_character);
+    //if(Mouse::isButtonPressed(Mouse::Left))player_character.setPosition(Mouse::getPosition(window).x,Mouse::getPosition(window).y);
+    player.drawEntity(window);
     window.display();
   }
 
