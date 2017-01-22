@@ -18,6 +18,7 @@ Vector2f Entity::getEntityPosition()
 }
 void Entity::setEntityPosition(Vector2f pos)
 {
+  Entity::position =pos;
   entity.setPosition(pos);
 }
 FloatRect Entity::getCollbox()
